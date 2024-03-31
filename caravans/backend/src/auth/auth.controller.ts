@@ -1,4 +1,4 @@
-import { Body, Controller, InternalServerErrorException, Post } from "@nestjs/common";
+import { Body, Controller, Header, InternalServerErrorException, Post } from "@nestjs/common";
 import { AuthService } from "./auth.service";
 import { UsersService } from "src/users/users.service";
 
@@ -32,14 +32,16 @@ export class AuthController {
   }
 
   @Post("/login")
+  @Header('Content-Type', 'application/json')
   async login(
     @Body("email") email: string,
     @Body("password") password: string
-  ): Promise<string> {
+  ): Promise<{token: string}> {
     try {     
-      const result = await this.authService.login(email, password);
-      return result;
+      const result = await this.authService.login(email, password);      
+      return { token: result }; // TODO: add expirationDate too
     } catch(err: any) {
+      // TODO: create custom error handler class that takes errType, status and message
       throw new InternalServerErrorException(err.message);
     }
   }

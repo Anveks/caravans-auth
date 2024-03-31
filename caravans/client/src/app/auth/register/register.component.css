@@ -1,0 +1,49 @@
+h3 {
+  text-align: center;
+}
+
+form {
+  background-color: lightgray;
+  padding: 1rem;
+  margin: 1rem;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  width: 50%;
+}
+
+form input {
+  padding: .5rem;
+  border: transparent;
+}
+
+.btns {
+  display: flex;
+  justify-content: center;
+  margin: 1rem;
+}
+
+button {
+  padding: 0.5rem;
+  border: transparent;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: lightcyan;
+  /* font-weight: bold; */
+  transition: 1s;
+}
+
+form input.ng-invalid.ng-touched {
+  border: 1px solid salmon !important;
+}
+
+.error {
+  border: 1px solid salmon;
+  background-color: pink;
+  color: white;
+  border-radius: 15px;
+  padding: 1rem;
+  margin-top: 1rem;
+}

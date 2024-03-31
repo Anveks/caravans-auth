@@ -1,6 +1,5 @@
 import { BadRequestException, Injectable, InternalServerErrorException, NotFoundException } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
-import * as bcrypt from 'bcrypt';
 import * as jwt from 'jsonwebtoken';
 import mongoose, { Model } from "mongoose";
 import { UserType } from "src/shared/enums/user_type.enum";
@@ -44,7 +43,7 @@ export class AuthService {
     }
   }
 
-  async login(email: string, password: string) {
+  async login(email: string, password: string): Promise<string> {
     try {
       const user = await this.userModel.findOne({ email }).exec();
       console.log(user);
@@ -71,7 +70,7 @@ export class AuthService {
       return token;
   
     } catch (err) {
-      if (err instanceof BadRequestException) throw err; // Re-throw BadRequestException
+      if (err instanceof BadRequestException || err instanceof NotFoundException) throw err; // Re-throw BadRequestException
       throw new InternalServerErrorException("Error while logging in.");
     }
   }

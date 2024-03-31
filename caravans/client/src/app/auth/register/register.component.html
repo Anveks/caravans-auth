@@ -1,0 +1,53 @@
+
+@if (isLoading) {
+  <app-load-spinner style="text-align: center;"></app-load-spinner>
+} @else {
+  <form #registerForm="ngForm" (ngSubmit)="onSubmit(registerForm)">
+    <h3>register</h3>
+
+    <label for="email">email: </label>
+    <input
+      type="email"
+      id="email"
+      [(ngModel)]="email"
+      name="email"
+      required
+      email
+    >
+
+    <label for="password">password: </label>
+    <input
+      type="password"
+      id="password"
+      [(ngModel)]="password"
+      name="password"
+      required
+      minlength="6"
+    >
+
+    <label for="name">name: </label>
+    <input
+      type="string"
+      id="name"
+      [(ngModel)]="name"
+      name="name"
+      required
+    >
+
+    <label for="address">address: </label>
+    <input
+      type="string"
+      id="address"
+      [(ngModel)]="address"
+      name="address"
+      required
+    >
+
+    <div class="btns">
+      <button type="submit" [disabled]="!registerForm.valid">register</button>
+      <button type="button" [routerLink]="'/login'">sign in</button>
+    </div>
+  </form>
+}
+
+

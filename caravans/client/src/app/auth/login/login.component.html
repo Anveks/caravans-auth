@@ -1,0 +1,40 @@
+@if (isLoading) {
+  <app-load-spinner style="text-align: center;"></app-load-spinner>
+} @else {
+  <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
+    <h3>login</h3>
+
+    <label for="email">email: </label>
+    <input
+      type="email"
+      id="email"
+      [(ngModel)]="email"
+      name="email"
+      required
+      email
+    >
+
+    <label for="password">password: </label>
+    <input
+      type="password"
+      id="password"
+      [(ngModel)]="password"
+      name="password"
+      required
+      minlength="6"
+    >
+
+    <!-- <div class="error">im error{{error.message}}</div> -->
+
+    @if (error) {
+      <div class="error">{{error}}</div>
+    }
+
+    <div class="btns">
+      <button type="submit" [disabled]="!loginForm.valid">login</button>
+      <button type="button" [routerLink]="'/register'">register</button>
+    </div>
+  </form>
+
+}
+

@@ -10,11 +10,7 @@ import { UtilsService } from "src/shared/utils/utils.service";
     MongooseModule.forFeature([{
     name: 'User',
     schema: UserSchema
-  },
-  // {
-  //   name: "Credentials",
-  //   schema: CredentialsSchema
-  // }
+  }
 ])
   ],
   controllers: [
