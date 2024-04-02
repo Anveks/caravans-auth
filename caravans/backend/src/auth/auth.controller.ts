@@ -22,13 +22,9 @@ export class AuthController {
     @Body("address") address: string,
     // type is assigned in the service
   ) {
-    try {
-      const result = await this.authService.register(name, email, password, address);
-      console.log(result);
-      return result;
-    } catch(err: any) {
-      throw new InternalServerErrorException(err.message);
-    }
+    const result = await this.authService.register(name, email, password, address);
+    console.log(result);
+    return result;
   }
 
   @Post("/login")
@@ -37,13 +33,8 @@ export class AuthController {
     @Body("email") email: string,
     @Body("password") password: string
   ): Promise<{token: string}> {
-    try {     
-      const result = await this.authService.login(email, password);      
-      return { token: result }; // TODO: add expirationDate too
-    } catch(err: any) {
-      // TODO: create custom error handler class that takes errType, status and message
-      throw new InternalServerErrorException(err.message);
-    }
+    const result = await this.authService.login(email, password);      
+    return { token: result }; // TODO: add expirationDate too
   }
 
   @Post("/logout")
