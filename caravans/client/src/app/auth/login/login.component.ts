@@ -39,7 +39,9 @@ export class LoginComponent {
         this.router.navigate(['/placeholder'])
       },
       (error: any) => {
-        this.error = error.error.message;
+        console.log(error);
+
+        this.error = error.message;
         this.isLoading = !this.isLoading;
       }
     );

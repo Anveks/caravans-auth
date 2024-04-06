@@ -4,7 +4,7 @@ import { ClientError } from "../models/error.models";
 
 interface HttpExceptionResponse {
   statusCode: number,
-  error: string,
+  message: string,
 }
 
 interface CustomHttpExceptionResponse extends HttpExceptionResponse {
@@ -29,7 +29,7 @@ export class AllExceptionsFilter implements ExceptionFilter {
       status = exception.getStatus();
       const errorResponse = exception.getResponse();
 
-      errorMessage = (errorResponse as HttpExceptionResponse).error || exception.message;
+      errorMessage = (errorResponse as HttpExceptionResponse).message || exception.message;
     } else {
       status = HttpStatus.INTERNAL_SERVER_ERROR;
       errorMessage = 'Critical internal server error occured!';
@@ -44,7 +44,7 @@ export class AllExceptionsFilter implements ExceptionFilter {
   // constructing the error response in a private method: 
   private getErrorResponse = (status: HttpStatus, errorMessage : string, request: Request): CustomHttpExceptionResponse => ({ 
     statusCode: status,
-    error: errorMessage,
+    message: errorMessage,
     path: request.path,
     method: request.method,
     timeStamp: new Date(), // probably not really needed here, but let it be till the logger is written...
@@ -52,10 +52,10 @@ export class AllExceptionsFilter implements ExceptionFilter {
 
    // loggin the error in the console (for now); TODO: log to a file later
    private logError = (errorResponse: CustomHttpExceptionResponse, request: Request, exception: unknown): void => {
-    const { statusCode, error } = errorResponse; // extracting the needed variables 
+    const { statusCode, message } = errorResponse; // extracting the needed variables 
     const { method, url } = request;
     const errorLog = `Response Code: ${statusCode} - Method: ${method} - URL: ${url} \n\n
-    ${exception instanceof ClientError ? exception.stack : error} \n\n
+    ${exception instanceof ClientError ? exception.stack : message} \n\n
     `; // TODO: add user to the request later
     console.log(errorLog);
    }

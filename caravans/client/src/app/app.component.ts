@@ -18,7 +18,7 @@ import { AuthService } from './services/auth.service';
     LoadingSpinnerComponent
   ],
   providers: [
-    AuthService
+    // AuthService
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'

@@ -14,7 +14,6 @@ export class AuthService {
 
   constructor(private http: HttpClient){}
 
-
   login(email: string, password: string) {
     const userData = {
       email: email,
@@ -58,8 +57,8 @@ export class AuthService {
   }
 
   private handleError(errorRes: HttpErrorResponse) {
-    // console.log(errorRes);
-    return throwError(errorRes); // return an observable to satisfy the catchError operator
+    console.log(errorRes);
+    return throwError(errorRes.error); // return an observable to satisfy the catchError operator
   }
 
   handleAuth(userData: any) {
