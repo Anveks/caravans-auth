@@ -15,7 +15,7 @@ import { AuthService } from './services/auth.service';
     LoginComponent,
     RegisterComponent,
     PlaceholderComponent,
-    LoadingSpinnerComponent
+    LoadingSpinnerComponent,
   ],
   providers: [
     // AuthService
