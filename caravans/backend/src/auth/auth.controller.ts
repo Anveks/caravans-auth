@@ -45,5 +45,6 @@ export class AuthController {
     } catch(err: any) {
       throw new InternalServerErrorException(err.message);
     }
-  }
+  };
+  
 }
